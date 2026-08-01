@@ -1,0 +1,753 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shivam Kumar | Founder & CEO | AI & Drone Engineer</title>
+  <meta
+    name="description"
+    content="Premium futuristic portfolio website for Shivam Kumar, Founder & CEO at Dronesarthi Pvt. Ltd., AI & Drone Engineer from Bihar, India."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-soft: #111827;
+      --card: rgba(17, 24, 39, 0.72);
+      --card-strong: rgba(30, 41, 59, 0.86);
+      --text: #f8fafc;
+      --muted: #cbd5e1;
+      --subtle: #94a3b8;
+      --cyan: #ff3b30;
+      --blue: #ff4d4f;
+      --purple: #ff6b57;
+      --glow: 0 0 30px rgba(255, 59, 48, 0.28);
+      --border: rgba(255, 255, 255, 0.12);
+      --radius: 22px;
+      --shadow: 0 24px 60px rgba(2, 6, 23, 0.45);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.18), transparent 22%),
+        radial-gradient(circle at top right, rgba(139, 92, 246, 0.16), transparent 24%),
+        radial-gradient(circle at bottom center, rgba(59, 130, 246, 0.12), transparent 28%),
+        var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(rgba(255,255,255,0.015), rgba(255,255,255,0.015)),
+        repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent 3px,
+          rgba(255,255,255,0.02) 3px,
+          rgba(255,255,255,0.02) 4px
+        );
+      opacity: 0.5;
+      z-index: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .bg-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -2;
+      display: block;
+    }
+
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(16px);
+      opacity: 0.42;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb.one {
+      top: 12%; left: 6%; width: 260px; height: 260px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.8), rgba(56, 189, 248, 0));
+      animation: floatBlob 7s ease-in-out infinite;
+    }
+
+    .orb.two {
+      right: 5%; top: 18%; width: 220px; height: 220px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.78), rgba(139, 92, 246, 0));
+      animation: floatBlob 9s ease-in-out infinite reverse;
+    }
+
+    .orb.three {
+      bottom: 10%; left: 55%; width: 280px; height: 280px;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.76), rgba(59, 130, 246, 0));
+      animation: floatBlob 8s ease-in-out infinite;
+    }
+
+    .container { width: min(1200px, calc(100% - 32px)); margin: 0 auto; position: relative; z-index: 1; }
+
+    .site-header {
+      position: sticky; top: 0; z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(15, 23, 42, 0.52);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-bar {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 14px 0;
+    }
+
+    .brand { font-weight: 800; letter-spacing: 0.03em; font-size: 1.05rem; color: var(--text); white-space: nowrap; }
+    .nav-links { display: flex; gap: 18px; align-items: center; flex-wrap: wrap; }
+    .nav-links a {
+      font-size: 0.92rem; color: var(--muted); position: relative; padding: 6px 0; transition: color 0.2s ease;
+    }
+
+    .nav-links a::after {
+      content: ""; position: absolute; left: 0; bottom: -2px; width: 100%; height: 2px; border-radius: 99px;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      transform: scaleX(0); transform-origin: left; transition: transform 0.26s ease;
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+    .nav-links a:hover::after, .nav-links a.active::after { transform: scaleX(1); }
+
+    .menu-toggle {
+      display: none; border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.03); color: white;
+      border-radius: 12px; width: 42px; height: 42px; cursor: pointer;
+    }
+
+    .hero { padding: 76px 0 62px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 30px; align-items: center; }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 10px; color: #ffdfdc; background: rgba(255, 59, 48, 0.16);
+      border: 1px solid rgba(255, 59, 48, 0.42); padding: 7px 12px; border-radius: 999px; font-size: 0.8rem;
+      font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; box-shadow: var(--glow); margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.9rem, 7vw, 5rem); line-height: 0.98; letter-spacing: -0.05em; margin-bottom: 16px;
+    }
+
+    .hero h1 .gradient {
+      background: linear-gradient(90deg, #90f0ff, #7c9cff 56%, #c49dff); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+
+    .hero h2 { font-size: 1.2rem; margin-bottom: 14px; color: #d7f2ff; font-weight: 700; }
+    .hero p { color: var(--muted); max-width: 680px; font-size: 1.04rem; line-height: 1.7; }
+
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 14px; padding: 12px 18px;
+      font-size: 0.93rem; font-weight: 700; transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .btn:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 30px rgba(0,0,0,0.28); }
+    .btn-primary { background: linear-gradient(135deg, #ff5f5a, #ff3b30); color: #fff; }
+    .btn-secondary { background: rgba(255,255,255,0.04); color: var(--text); }
+    .btn-ghost { background: rgba(255, 59, 48, 0.86); color: #fff; }
+
+    .portrait-shell {
+      position: relative; width: min(520px, 100%); margin-inline: auto; aspect-ratio: 1 / 1; display: grid; place-items: center; perspective: 1000px;
+    }
+
+    .portrait-ring, .portrait-core, .portrait-shadow, .portrait-pulse { position: absolute; inset: 0; border-radius: 50%; }
+    .portrait-ring {
+      inset: 6%; border: 1px solid rgba(56, 189, 248, 0.45); box-shadow: inset 0 0 38px rgba(56, 189, 248, 0.16), 0 0 30px rgba(56, 189, 248, 0.16);
+      animation: spinSlow 18s linear infinite;
+    }
+    .portrait-ring::before, .portrait-ring::after { content: ""; position: absolute; inset: 8%; border-radius: 50%; border: 1px solid rgba(139, 92, 246, 0.35); }
+    .portrait-ring::after { inset: 17%; border-color: rgba(255,255,255,0.25); }
+
+    .portrait-core {
+      inset: 8%; border-radius: 50%; background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(139, 92, 246, 0.12));
+      border: 1px solid rgba(255,255,255,0.12); box-shadow: var(--shadow), inset 0 0 70px rgba(255,255,255,0.04);
+      backdrop-filter: blur(14px); display: grid; place-items: center; overflow: hidden;
+    }
+
+    .portrait-core::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent 35%), radial-gradient(circle at top left, rgba(255,255,255,0.22), transparent 25%);
+      pointer-events: none;
+    }
+
+    .portrait-shine { position: absolute; inset: 12%; border-radius: 50%; background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.34), transparent 20%); mix-blend-mode: screen; pointer-events: none; }
+    .portrait-pulse { inset: 4%; border-radius: 50%; border: 1px solid rgba(56, 189, 248, 0.28); animation: pulseOut 5s ease-out infinite; }
+    .portrait-shadow { inset: auto 10% -4%; height: 38px; border-radius: 50%; background: rgba(8, 15, 36, 0.94); filter: blur(18px); transform: translateZ(-40px); }
+
+    .portrait-photo {
+      width: 86%; height: 86%; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid rgba(255,255,255,0.34);
+      box-shadow: 0 0 0 10px rgba(255,255,255,0.03); position: relative; z-index: 2; animation: floatImage 6s ease-in-out infinite;
+    }
+
+    .section { padding: 70px 0; }
+    .section-title { font-size: 1.9rem; font-weight: 800; margin-bottom: 10px; color: #ff4d4f; }
+    .section-copy { color: var(--subtle); max-width: 760px; margin-bottom: 26px; }
+    .glass-card {
+      background: var(--card); border: 1px solid var(--border); backdrop-filter: blur(16px); border-radius: var(--radius); box-shadow: var(--shadow);
+    }
+
+    .about-grid, .skills-grid, .projects-grid, .media-grid, .cert-grid, .education-grid, .contact-grid {
+      display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 20px;
+    }
+
+    .about-card, .skill-card, .project-card, .media-card, .cert-card, .education-card, .contact-card {
+      padding: 24px; position: relative; overflow: hidden; transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+    }
+
+    .about-card:hover, .skill-card:hover, .project-card:hover, .media-card:hover, .cert-card:hover, .education-card:hover, .contact-card:hover {
+      transform: translateY(-6px); border-color: rgba(56,189,248,0.45); box-shadow: 0 24px 60px rgba(9,15,36,0.56);
+    }
+
+    .card-icon { width: 42px; height: 42px; display: grid; place-items: center; border-radius: 12px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #ff4d4f; margin-bottom: 12px; }
+    .tiny-tag {
+      display: inline-block; padding: 6px 10px; border-radius: 999px; background: rgba(255, 59, 48, 0.15); border: 1px solid rgba(255, 59, 48, 0.45); color: #ff5d52; font-size: 0.78rem; margin-bottom: 12px; font-weight: 700;
+    }
+
+    .skill-card h3, .project-card h3, .media-card h3, .cert-card h3, .education-card h3, .contact-card h3 { margin-bottom: 10px; }
+    .skill-card p, .project-card p, .media-card p, .cert-card p, .education-card p, .contact-card p { color: var(--muted); line-height: 1.65; }
+    .tag-wrap { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .tag {
+      padding: 8px 12px; font-size: 0.8rem; color: #fff3f1; border-radius: 999px; background: rgba(255, 59, 48, 0.14); border: 1px solid rgba(255, 59, 48, 0.45);
+    }
+
+    .timeline { display: grid; gap: 18px; position: relative; }
+    .timeline::before { content: ""; position: absolute; left: 8px; top: 2px; bottom: 2px; width: 2px; background: linear-gradient(180deg, rgba(255,59,48,0.9), rgba(255, 128, 107, 0.32)); }
+    .timeline-item { position: relative; padding-left: 28px; }
+    .timeline-item::before {
+      content: ""; position: absolute; left: 2px; top: 8px; width: 14px; height: 14px; border-radius: 50%; background: #ff4d4f; box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.20);
+    }
+    .timeline-year { color: #ff6d63; font-size: 0.84rem; font-weight: 700; letter-spacing: 0.04em; margin-bottom: 6px; text-transform: uppercase; }
+
+    .project-visual {
+      height: 180px; border-radius: 18px; background: radial-gradient(circle at top left, rgba(56,189,248,0.35), transparent 28%), radial-gradient(circle at bottom right, rgba(139,92,246,0.32), transparent 35%), linear-gradient(135deg, rgba(188,234,255,0.1), rgba(20,31,58,0.4));
+      border: 1px solid rgba(255,255,255,0.08); display: grid; place-items: center; color: #e1f4ff; font-weight: 700; letter-spacing: 0.08em; margin-bottom: 15px; text-transform: uppercase;
+      box-shadow: inset 0 0 55px rgba(255,255,255,0.03);
+    }
+
+    .project-actions, .contact-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+
+    .contact-form { display: grid; gap: 14px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; border: 1px solid rgba(255,255,255,0.1); border-radius: 14px; background: rgba(255,255,255,0.04); color: var(--text); padding: 12px 14px; outline: none; resize: vertical; font: inherit;
+    }
+
+    .contact-form input:focus, .contact-form textarea:focus { border-color: rgba(56,189,248,0.48); box-shadow: 0 0 0 3px rgba(56,189,248,0.12); }
+
+    .footer { padding: 18px 0 38px; }
+    .footer-wrap { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; color: var(--subtle); }
+    .socials { display: flex; gap: 10px; }
+    .socials a {
+      width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--text); transition: transform 0.22s ease, background 0.22s ease;
+    }
+    .socials a:hover { background: rgba(255, 59, 48, 0.18); transform: translateY(-3px); }
+
+    .back-top {
+      position: fixed; right: 18px; bottom: 18px; z-index: 25; width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: rgba(56,189,248,0.18);
+      color: white; border: 1px solid rgba(56,189,248,0.36); box-shadow: var(--glow); opacity: 0; pointer-events: none; transition: opacity 0.24s ease, transform 0.24s ease;
+    }
+    .back-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    .reveal { opacity: 0; transform: translateY(24px); }
+    .reveal.visible { opacity: 1; transform: translateY(0); transition: opacity 0.8s ease, transform 0.8s ease; }
+
+    @keyframes spinSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    @keyframes floatBlob { 0%,100% { transform: translate3d(0,0,0) scale(1); } 50% { transform: translate3d(16px,-16px,0) scale(1.05); } }
+    @keyframes pulseOut { 0% { transform: scale(0.92); opacity: 0.85; } 100% { transform: scale(1.08); opacity: 0; } }
+    @keyframes floatImage { 0%,100% { transform: translateY(0px); } 50% { transform: translateY(-12px); } }
+
+    @media (max-width: 980px) {
+      .hero-grid, .about-grid, .skills-grid, .projects-grid, .media-grid, .cert-grid, .education-grid, .contact-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      .menu-toggle { display: inline-grid; place-items: center; }
+      .nav-links {
+        position: absolute; top: 64px; right: 16px; left: 16px; display: none; flex-direction: column; align-items: flex-start;
+        background: rgba(10,16,35,0.9); padding: 14px; border-radius: 18px; border: 1px solid rgba(255,255,255,0.08);
+      }
+      .nav-links.open { display: flex; }
+      .hero { padding-top: 54px; }
+      .hero h1 { font-size: 2.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <canvas class="bg-canvas" id="bgCanvas"></canvas>
+  <div class="orb one"></div>
+  <div class="orb two"></div>
+  <div class="orb three"></div>
+
+  <header class="site-header">
+    <div class="container nav-bar">
+      <a href="#home" class="brand">Shivam Kumar</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu"><i class="fa-solid fa-bars"></i></button>
+      <nav class="nav-links" id="navLinks">
+        <a class="active" href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#media">Media</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal">
+          <div class="eyebrow"><i class="fa-solid fa-sparkles"></i> Founder & CEO • Dronesarthi Pvt. Ltd.</div>
+          <h1>Hi, I'm <span class="gradient">Shivam Kumar</span></h1>
+          <h2>Founder & CEO at Dronesarthi Pvt. Ltd. | AI & Drone Engineer</h2>
+          <p>
+            Final-year B.Tech CSE (AI) student specializing in Autonomous UAV Systems, Robotics, Embedded AI,
+            Computer Vision, and Intelligent Drone Technologies. Recipient of ₹10 Lakhs Startup Bihar Seed Grant
+            and incubated at IIT Patna.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="mailto:shivam@dronesarthi.in"><i class="fa-solid fa-envelope"></i> Get In Touch</a>
+            <a class="btn btn-secondary" href="https://www.linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a class="btn btn-secondary" href="https://github.com" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+            <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-download"></i> Download Resume</a>
+          </div>
+        </div>
+
+        <div class="portrait-shell reveal" id="portraitShell">
+          <div class="portrait-pulse"></div>
+          <div class="portrait-ring"></div>
+          <div class="portrait-shadow"></div>
+          <div class="portrait-core">
+            <div class="portrait-shine"></div>
+            <img class="portrait-photo" id="profileImage" src="https://media.licdn.com/dms/image/v2/D5622AQGZOONeV_T5dA/feedshare-shrink_800/B56ZsEgR7GHQAs-/0/1765307142371?e=2147483647&v=beta&t=_Nk3eNImvaCZDv9ZHLWv6QmXRgnncJTQ34CkephH1So" alt="Shivam Kumar portrait" onerror="this.onerror=null;this.src='profile.svg';" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title reveal">About</h2>
+        <p class="section-copy reveal">
+          Founder of Dronesarthi Pvt. Ltd. with a sharp focus on AI, drone technology, embedded systems,
+          robotics, computer vision, autonomous UAV systems, entrepreneurship, and startup ecosystem.
+        </p>
+
+        <div class="about-grid">
+          <article class="glass-card about-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-rocket"></i></div>
+            <div class="tiny-tag">Founder / Builder</div>
+            <h3>Visionary Technology Leader</h3>
+            <p>
+              Shivam Kumar leads a multidisciplinary innovation company focused on producing real-world
+              intelligent systems that solve operational and social challenges through automation.
+            </p>
+          </article>
+
+          <article class="glass-card about-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-bolt"></i></div>
+            <div class="tiny-tag">Passion Areas</div>
+            <h3>Core Interest Clusters</h3>
+            <p>
+              AI, Drone Technology, Embedded Systems, Robotics, Computer Vision, Autonomous UAV, Innovation,
+              Entrepreneurship, and Startup Ecosystem development.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="skills">
+      <div class="container">
+        <h2 class="section-title reveal">Skills</h2>
+        <p class="section-copy reveal">
+          A futuristic technology stack balancing software engineering, embedded intelligence, robotics platforms,
+          machine learning, and cloud-native workflow design.
+        </p>
+
+        <div class="skills-grid">
+          <article class="glass-card skill-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-code"></i></div>
+            <div class="tiny-tag">Programming</div>
+            <h3>Languages & Web</h3>
+            <div class="tag-wrap">
+              <span class="tag">Python</span><span class="tag">Java</span><span class="tag">C</span><span class="tag">C++</span><span class="tag">Kotlin</span><span class="tag">JavaScript</span><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">React</span><span class="tag">SQL</span>
+            </div>
+          </article>
+
+          <article class="glass-card skill-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-robot"></i></div>
+            <div class="tiny-tag">Drone & Robotics</div>
+            <h3>Autonomous Systems</h3>
+            <div class="tag-wrap">
+              <span class="tag">PX4</span><span class="tag">Drone Technology</span><span class="tag">Arduino</span><span class="tag">ESP8266</span><span class="tag">Embedded Systems</span><span class="tag">IoT</span>
+            </div>
+          </article>
+
+          <article class="glass-card skill-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-brain"></i></div>
+            <div class="tiny-tag">AI & Cloud</div>
+            <h3>Vision & Intelligence</h3>
+            <div class="tag-wrap">
+              <span class="tag">Machine Learning</span><span class="tag">Computer Vision</span><span class="tag">OpenCV</span><span class="tag">Firebase</span><span class="tag">SQLite</span><span class="tag">Git</span><span class="tag">GitHub</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="experience">
+      <div class="container">
+        <h2 class="section-title reveal">Experience</h2>
+        <p class="section-copy reveal">From startup formation to team leadership, flight control systems, and institutional training outreach.</p>
+
+        <div class="glass-card about-card reveal">
+          <div class="timeline">
+            <div class="timeline-item">
+              <div class="timeline-year">2023 – Present</div>
+              <h3>Founder & CEO — Dronesarthi Pvt. Ltd.</h3>
+              <p>
+                Secured ₹10 Lakhs Startup Bihar Seed Funding, gained IIT Patna incubation support, built UAV systems,
+                led multidisciplinary hardware/software teams, and delivered Drone & AI workshops for 500+ students across 5+ colleges.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title reveal">Projects</h2>
+        <p class="section-copy reveal">Premium product concepts combining robotics, telemetry, automation, and AI-powered software workflows.</p>
+
+        <div class="projects-grid">
+          <article class="glass-card project-card reveal">
+            <div class="project-visual">Medical UAV</div>
+            <div class="tiny-tag">ESP8266 • PX4 • Autonomous Flight</div>
+            <h3>High-Altitude Hybrid Medical UAV</h3>
+            <p>Autonomous drone for medical logistics with real-time telemetry and fail-safe protocols.</p>
+            <div class="project-actions">
+              <a class="btn btn-secondary" href="#contact"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+          </article>
+
+          <article class="glass-card project-card reveal">
+            <div class="project-visual">Ground Control</div>
+            <div class="tiny-tag">React • Python • Firebase</div>
+            <h3>DroneSarthi Telemetry Platform</h3>
+            <p>Central control station for telemetry, flight logging, and mission-level ground monitoring.</p>
+            <div class="project-actions">
+              <a class="btn btn-secondary" href="#contact"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+          </article>
+
+          <article class="glass-card project-card reveal">
+            <div class="project-visual">Smart IoT</div>
+            <div class="tiny-tag">IoT • Sensors • Automation</div>
+            <h3>Smart Irrigation & Parking System</h3>
+            <p>IoT automation network reducing water usage by 30% and improving municipal parking workflows.</p>
+            <div class="project-actions">
+              <a class="btn btn-secondary" href="#contact"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+          </article>
+
+          <article class="glass-card project-card reveal">
+            <div class="project-visual">Utility Apps</div>
+            <div class="tiny-tag">Kotlin • Material UI</div>
+            <h3>Notes Vault & TorchPro</h3>
+            <p>Android utility applications built with Kotlin and Material UI for everyday productivity.</p>
+            <div class="project-actions">
+              <a class="btn btn-secondary" href="#contact"><i class="fa-brands fa-github"></i> GitHub</a>
+              <a class="btn btn-ghost" href="#contact"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="media">
+      <div class="container">
+        <h2 class="section-title reveal">Media Coverage</h2>
+        <p class="section-copy reveal">Highlighting the public recognition, startup grants, and incubation momentum behind Dronesarthi Pvt. Ltd.</p>
+
+        <div class="media-grid">
+          <article class="glass-card media-card reveal">
+            <div class="card-icon"><i class="fa-regular fa-newspaper"></i></div>
+            <h3>Startup Bihar Grant</h3>
+            <p>Featured for securing ₹10 Lakhs in government-backed startup funding for deep-tech innovation.</p>
+            <a class="btn btn-secondary" href="#contact"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Press Article</a>
+          </article>
+
+          <article class="glass-card media-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-award"></i></div>
+            <h3>IIT Patna Recognition</h3>
+            <p>Recognized for meaningful UAV innovation and institutional incubation support from IIT Patna.</p>
+            <a class="btn btn-secondary" href="#contact"><i class="fa-solid fa-arrow-up-right-from-square"></i> View Press Article</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="certificates">
+      <div class="container">
+        <h2 class="section-title reveal">Certifications</h2>
+        <p class="section-copy reveal">Official recognition of startup achievement, innovation excellence, and incubatee status.</p>
+
+        <div class="cert-grid">
+          <article class="glass-card cert-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-certificate"></i></div>
+            <h3>Startup Bihar Recognition</h3><p>Department of Industries, Govt. of Bihar</p>
+            <a class="btn btn-secondary" href="#contact"><i class="fa-solid fa-circle-check"></i> Verify Certificate</a>
+          </article>
+
+          <article class="glass-card cert-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-certificate"></i></div>
+            <h3>SIH Finalist</h3><p>AICTE & Ministry of Education</p>
+            <a class="btn btn-secondary" href="#contact"><i class="fa-solid fa-circle-check"></i> Verify Certificate</a>
+          </article>
+
+          <article class="glass-card cert-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-certificate"></i></div>
+            <h3>IIT Patna Incubatee</h3><p>Incubation Centre, IIT Patna</p>
+            <a class="btn btn-secondary" href="#contact"><i class="fa-solid fa-circle-check"></i> Verify Certificate</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="education">
+      <div class="container">
+        <h2 class="section-title reveal">Education</h2>
+        <p class="section-copy reveal">Building an academic foundation in artificial intelligence and computing n-grid">
+          <article class="glass-card education-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <h3>B.Tech in CSE (Artificial Intelligence)</h3>
+            <p>Motihari College of Engineering • 2023 – Present</p>
+          </article>
+
+          <article class="glass-card education-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-book"></i></div>
+            <h3>Diploma in Computer Science Engineering</h3>
+            <p>Government Polytechnic • 2020 – 2023</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="container">
+        <h2 class="section-title reveal">Contact</h2>
+        <div class="contact-grid">
+          <article class="glass-card contact-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-paper-plane"></i></div>
+            <h3>Let’s Connect</h3>
+            <p>Email: <a style="color:#8fe6ff" href="mailto:shivam@dronesarthi.in">shivam@dronesarthi.in</a><br />Location: Bihar, India</p>
+            <div class="contact-actions">
+              <a class="btn btn-primary" href="mailto:shivam@dronesarthi.in"><i class="fa-solid fa-envelope"></i> Email Me</a>
+              <a class="btn btn-secondary" href="https://www.linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+              <a class="btn btn-secondary" href="https://github.com" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub</a>
+            </div>
+          </article>
+
+          <article class="glass-card contact-card reveal">
+            <div class="card-icon"><i class="fa-solid fa-comment-dots"></i></div>
+            <h3>Send a Message</h3>
+            <form class="contact-form">
+              <input type="text" placeholder="Name" />
+              <input type="email" placeholder="Email" />
+              <input type="text" placeholder="Subject" />
+              <textarea rows="4" placeholder="Message"></textarea>
+              <button type="button" class="btn btn-primary">Send Message</button>
+            </form>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-wrap">
+      <div><strong>© 2026 Shivam Kumar</strong><br /><span>Founder & CEO • Dronesarthi Pvt. Ltd.</span></div>
+      <div class="socials">
+        <a href="https://www.linkedin.com" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:shivam@dronesarthi.in"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <a class="back-top" id="backTop" href="#home" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></a>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.min.js"></script>
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    menuToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+    navLinks.querySelectorAll('a').forEach(link => link.addEventListener('click', () => navLinks.classList.remove('open')));
+
+    const sections = document.querySelectorAll('section[id]');
+    const navAnchors = document.querySelectorAll('.nav-links a');
+    const updateActiveLink = () => {
+      let current = 'home';
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 120 && rect.bottom >= 120) current = section.id;
+      });
+      navAnchors.forEach(link => {
+        const href = link.getAttribute('href').slice(1);
+        link.classList.toggle('active', href === current);
+      });
+    };
+    window.addEventListener('scroll', updateActiveLink, { passive: true });
+
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => observer.observe(el));
+
+    gsap.from('.hero h1, .hero h2, .hero p, .hero-actions', { y: 24, opacity: 0, duration: 1.05, stagger: 0.12, ease: 'power3.out' });
+    gsap.from('.portrait-shell', { y: 35, opacity: 0, duration: 1.2, scale: 0.95, ease: 'power3.out' });
+
+    const backTop = document.getElementById('backTop');
+    window.addEventListener('scroll', () => backTop.classList.toggle('visible', window.scrollY > 420));
+
+    const portraitShell = document.getElementById('portraitShell');
+    document.addEventListener('mousemove', (e) => {
+      const x = (e.clientX / window.innerWidth - 0.5) * 12;
+      const y = (e.clientY / window.innerHeight - 0.5) * -12;
+      portraitShell.style.transform = `rotateX(${y}deg) rotateY(${x}deg)`;
+    });
+
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let width = 0; let height = 0; let particles = [];
+
+    const resizeCanvas = () => {
+      width = canvas.width = window.innerWidth * Math.min(window.devicePixelRatio || 1, 2);
+      height = canvas.height = window.innerHeight * Math.min(window.devicePixelRatio || 1, 2);
+      canvas.style.width = window.innerWidth + 'px';
+      canvas.style.height = window.innerHeight + 'px';
+      ctx.setTransform(1,0,0,1,0,0);
+      particles = Array.from({ length: Math.max(50, Math.floor(width / 18)) }, () => ({ x: Math.random()*width, y: Math.random()*height, r: Math.random()*2.4+0.5, vx: (Math.random() - 0.5) *0.18, vy: (Math.random() - 0.5)*0.18, alpha: Math.random()*0.7+0.16 }));
+    };
+
+    const animateParticles = () => {
+      ctx.clearRect(0,0,width,height);
+      particles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'rgba(56,189,248,0.5)';
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animateParticles);
+    };
+
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+    animateParticles();
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('bgCanvas'), alpha: true, antialias: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+    const group = new THREE.Group();
+    scene.add(group);
+
+    const geometry = new THREE.IcosahedronGeometry(0.9, 0);
+    const material = new THREE.MeshStandardMaterial({ color: 0x38bdf8, emissive: 0x0d3b66, metalness: 0.5, roughness: 0.2, wireframe: true, transparent: true, opacity: 0.8 });
+    const object = new THREE.Mesh(geometry, material);
+    group.add(object);
+
+    const secondGeo = new THREE.SphereGeometry(0.5, 24, 24);
+    const secondMaterial = new THREE.MeshStandardMaterial({ color: 0x8b5cf6, emissive: 0x22103d, wireframe: true, transparent: true, opacity: 0.7 });
+    const secondObject = new THREE.Mesh(secondGeo, secondMaterial);
+    secondObject.position.set(1.4, -1.2, 0.8);
+    group.add(secondObject);
+
+    const lightA = new THREE.PointLight(0x38bdf8, 10, 30); lightA.position.set(5,5,5); scene.add(lightA);
+    const lightB = new THREE.PointLight(0x8b5cf6, 8, 20); lightB.position.set(-5,-2,5); scene.add(lightB);
+    camera.position.z = 6;
+
+    const mouse = { x: 0, y: 0 };
+    window.addEventListener('pointermove', (e) => { mouse.x = (e.clientX / window.innerWidth - 0.5) * 2; mouse.y = (e.clientY / window.innerHeight - 0.5) * 2; });
+
+    const tick = () => {
+      requestAnimationFrame(tick);
+      object.rotation.x += 0.004; object.rotation.y += 0.005;
+      secondObject.rotation.x -= 0.003; secondObject.rotation.y += 0.004;
+      group.rotation.x = mouse.y * 0.2; group.rotation.y = mouse.x * 0.2;
+      renderer.render(scene, camera);
+    };
+    tick();
+
+    window.addEventListener('resize', () => {
+      camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    });
+  </script>
+</body>
+</html>
+ithub.com/shivamkumar" target="_blank" class="btn-pill"><i class="fa-brands fa-github"></i></a>
+                    <a href="mailto:shivam@dronesarthi.in" class="btn-pill"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Smooth Scrolling & Active State Script -->
+    <script>
+        document.querySelectorAll('.nav-item a').forEach(anchor => {
+            anchor.addEventListener('click', function() {
+                document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
+                this.parentElement.classList.add('active');
+            });
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
